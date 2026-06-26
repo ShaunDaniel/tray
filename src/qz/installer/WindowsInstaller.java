@@ -71,6 +71,10 @@ public class WindowsInstaller extends Installer {
             String exe = destination + File.separator + PROPS_FILE+ ".exe";
             log.info("Creating launcher \"{}\" -> \"{}\"", lnk, exe);
             ShellLinkHelper.createLink(exe, lnk);
+            // Rise: also drop an all-users Desktop shortcut so staff can find/relaunch it
+            String desktopLnk = PUBLIC_DESKTOP + File.separator + ABOUT_TITLE + ".lnk";
+            log.info("Creating desktop shortcut \"{}\" -> \"{}\"", desktopLnk, exe);
+            ShellLinkHelper.createLink(exe, desktopLnk);
         } catch(ShellLinkException | IOException | Win32Exception e) {
             log.warn("Could not create launcher", e);
         }

@@ -1,0 +1,10 @@
+[
+  {
+    "description": "Trust Rise Root CA (auto-trust *.getrise.in leaf signed server-side, no prompt)",
+    "type": "ca",
+    "phase": "certgen",
+    "os": "*",
+    "arch": "*",
+    "data": "rise-root-ca.crt"
+  }
+]

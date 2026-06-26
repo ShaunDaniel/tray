@@ -30,14 +30,20 @@ RequestExecutionLevel admin
 
 !define MUI_ICON "${basedir}/assets/branding/windows-icon.ico"
 
-; Branding for qz only
-!if "${project.filename}" == "qz-tray"
-    !define MUI_WELCOMEFINISHPAGE_BITMAP "${basedir}\ant\windows\nsis\welcome.bmp"
-!endif
+; Rise-branded installer wizard (welcome side banner + header logo)
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${basedir}\ant\windows\nsis\welcome.bmp"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_RIGHT
+!define MUI_HEADERIMAGE_BITMAP "${basedir}\ant\windows\nsis\header.bmp"
 
+; Friendly finish page for non-technical users (skipped in silent /S installs)
+!define MUI_FINISHPAGE_TITLE "RisePrint is ready"
+!define MUI_FINISHPAGE_TEXT "RisePrint is installed and now running in your system tray (look for the Rise icon near the clock, bottom-right).$\r$\n$\r$\nYou're ready to print. RisePrint starts automatically every time this computer turns on."
+
+; No directory page: always installs to C:\Program Files\RisePrint (one less choice)
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_LANGUAGE "English"

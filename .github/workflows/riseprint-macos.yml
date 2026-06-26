@@ -1,0 +1,35 @@
+name: RisePrint macOS DMG
+
+# Build the RisePrint .dmg on a real Apple machine in the cloud — no Mac needed.
+# Run it manually: GitHub repo -> Actions -> "RisePrint macOS DMG" -> Run workflow.
+# Download the result under the run's "Artifacts" section.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dmg:
+    runs-on: macos-latest          # real Apple hardware (Apple Silicon)
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [aarch64, x86_64]    # Apple Silicon + Intel. Drop x86_64 if all your Macs are M-series.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '11'        # liberica 11 == jlink target -> no version-mismatch download
+          distribution: liberica
+
+      - name: Install appdmg
+        run: npm install -g appdmg   # ant is preinstalled on the runner; appdmg builds the disk image
+
+      - name: Build DMG (bakes in Rise Root CA auto-trust)
+        run: ant -Dprovision.file=provision/provision.json -Dtarget.arch=${{ matrix.arch }} dmg
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RisePrint-macos-${{ matrix.arch }}
+          path: out/riseprint-*.dmg
+          if-no-files-found: error

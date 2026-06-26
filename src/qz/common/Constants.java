@@ -23,7 +23,7 @@ public class Constants {
     public static final String ALLOW_FILE = "allowed";
     public static final String TEMP_FILE = "temp";
     public static final String LOG_FILE = "debug";
-    public static final String PROPS_FILE = "qz-tray"; // .properties extension is assumed
+    public static final String PROPS_FILE = "riseprint"; // .properties extension is assumed; MUST match ant project.filename
     public static final String PREFS_FILE = "prefs"; // .properties extension is assumed
     public static final String[] PERSIST_PROPS = {"file.whitelist", "file.allow", "networking.hostname", "networking.port", STEAL_WEBSOCKET_PROPERTY };
     public static final String AUTOSTART_FILE = ".autostart";
@@ -31,13 +31,13 @@ public class Constants {
 
     public static final int BORDER_PADDING = 10;
 
-    public static final String ABOUT_TITLE = "QZ Tray";
-    public static final String ABOUT_EMAIL = "support@qz.io";
-    public static final String ABOUT_URL = "https://qz.io";
-    public static final String ABOUT_COMPANY = "QZ Industries, LLC";
-    public static final String ABOUT_CITY = "Canastota";
-    public static final String ABOUT_STATE = "NY";
-    public static final String ABOUT_COUNTRY = "US";
+    public static final String ABOUT_TITLE = "RisePrint";
+    public static final String ABOUT_EMAIL = "admin@getrise.in"; // flips IS_REBRANDED -> true
+    public static final String ABOUT_URL = "https://getrise.in";
+    public static final String ABOUT_COMPANY = "Rising Dine Pvt. Ltd.";
+    public static final String ABOUT_CITY = "Bengaluru";
+    public static final String ABOUT_STATE = "Karnataka";
+    public static final String ABOUT_COUNTRY = "IN";
 
     public static final String ABOUT_LICENSING_URL = Constants.ABOUT_URL + "/licensing";
     public static final String ABOUT_SUPPORT_URL = Constants.ABOUT_URL + "/support";
@@ -48,7 +48,7 @@ public class Constants {
     public static final String VERSION_DOWNLOAD_URL = "https://github.com/qzind/tray/releases";
     public static final boolean ENABLE_DIAGNOSTICS = true; // Diagnostics menu (logs, etc)
 
-    public static final String BRAND_COLOR_HEX = "#44aa53";
+    public static final String BRAND_COLOR_HEX = "#FF7F68"; // Rise coral
     @SuppressWarnings("ConstantValue")
     public static final boolean IS_REBRANDED = !ABOUT_EMAIL.equals("support@qz.io");
 

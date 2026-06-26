@@ -1,0 +1,31 @@
+name: RisePrint Windows installer
+
+# Build the RisePrint setup .exe in the cloud (no local toolchain needed).
+# Run it manually: GitHub repo -> Actions -> "RisePrint Windows installer" -> Run workflow.
+# Download the result under the run's "Artifacts" section.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '11'        # liberica 11 == jlink target -> no version-mismatch download
+          distribution: liberica
+
+      - name: Install NSIS
+        run: choco install nsis -y   # ant is preinstalled on the runner
+
+      - name: Build installer (bakes in Rise Root CA auto-trust)
+        run: ant "-Dprovision.file=provision/provision.json" nsis
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RisePrint-windows-x86_64
+          path: out/riseprint-*.exe
+          if-no-files-found: error
